@@ -1,5 +1,5 @@
 function getMass(){
-  
+  return 1;
 }
 
 
@@ -43,19 +43,4 @@ describe('test', function() {
 });
 
 
-var estraverse = require('../node_modules/estraverse/estraverse');
-var esprima = require('../node_modules/esprima/esprima');
 
-var traverse = function(tree, transform) {
-  estraverse.traverse(tree, {
-    enter: function(node) {
-      return transform(node, this.parents());
-    }
-  });
-};
-
-var tree = esprima.parse('x = 1');
-
-traverse(tree, function(node, parents) {
-  console.log('node', node);
-});
