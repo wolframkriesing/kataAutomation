@@ -12,7 +12,8 @@ var Syntax = estraverse.Syntax;
 
 var massWeight = {
   VARIABLEDECLARATION : 1,
-  LITERAL : 1
+  LITERAL : 1,
+  CALLEXPRESSION : 2
 };
 
 function getMass(code) {
@@ -25,6 +26,9 @@ function getMass(code) {
     }
     if (node.type == Syntax.Literal) {
       mass += massWeight.LITERAL;
+    }
+    if (node.type == Syntax.CallExpression) {
+      mass += massWeight.CALLEXPRESSION;
     }
   });
   return mass;
