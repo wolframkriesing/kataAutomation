@@ -41,23 +41,23 @@ describe('test', function () {
   });
 
   it('constant', function () {
-    expect(getMass('0')).toBe(1);
+    expect(getMass('0')).toBe(massWeight.LITERAL);
   });
 
   it('declare variable', function () {
-    expect(getMass('var x')).toBe(1);
+    expect(getMass('var x')).toBe(massWeight.VARIABLEDECLARATION);
   });
 
   it('variabel declaration and literal', function () {
-    expect(getMass('var x = 0')).toBe(2);
+    expect(getMass('var x = 0')).toBe(massWeight.VARIABLEDECLARATION + massWeight.LITERAL);
   });
 
   it('call expression', function () {
-    expect(getMass('count()')).toBe(2);
+    expect(getMass('count()')).toBe(massWeight.CALLEXPRESSION);
   });
 
   it('call expression with literal', function () {
-    expect(getMass('count(4)')).toBe(3);
+    expect(getMass('count(4)')).toBe(massWeight.CALLEXPRESSION + massWeight.LITERAL);
   });
 //
 //  it('call instance method without value', function () {
