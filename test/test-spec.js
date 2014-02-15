@@ -39,9 +39,9 @@ describe('test', function () {
     expect(getMass('var x')).toBe(1);
   });
 
-//  it('variabel and constant', function () { //binding
-//    expect(getMass('var x = 0')).toBe(2);
-//  });
+  it('variabel declaration and literal', function () {
+    expect(getMass('var x = 0')).toBe(2);
+  });
 
 //  it('call function', function () {
 //    expect(getMass('count()')).toBe(2);
