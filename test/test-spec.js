@@ -1,5 +1,7 @@
 function getMass(){
   return 1;
+var estraverse = require('../node_modules/estraverse/estraverse');
+var esprima = require('../node_modules/esprima/esprima');
 }
 
 
