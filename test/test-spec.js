@@ -48,9 +48,9 @@ describe('test', function () {
     expect(getMass('var x = 0')).toBe(2);
   });
 
-//  it('call function', function () {
-//    expect(getMass('count()')).toBe(2);
-//  });
+  it('call function', function () {
+    expect(getMass('count()')).toBe(2);
+  });
 //
 //  it('call function', function () {
 //    expect(getMass('count(4)')).toBe(3);
