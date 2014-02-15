@@ -10,8 +10,10 @@ function traverse(tree, transform) {
 };
 var Syntax = estraverse.Syntax;
 
-VARIABLEDECLARATION = 1;
-LITERAL = 1;
+var massWeight = {
+  VARIABLEDECLARATION : 1,
+  LITERAL : 1
+};
 
 function getMass(code) {
   var mass = 0;
@@ -19,10 +21,10 @@ function getMass(code) {
 
   traverse(tree, function (node, parents) {
     if (node.type == Syntax.VariableDeclaration) {
-      mass += VARIABLEDECLARATION;
+      mass += massWeight.VARIABLEDECLARATION;
     }
     if (node.type == Syntax.Literal) {
-      mass += LITERAL;
+      mass += massWeight.LITERAL;
     }
   });
   return mass;
