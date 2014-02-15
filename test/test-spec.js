@@ -17,6 +17,9 @@ function getMass(code) {
   var tree = esprima.parse(code);
 
   traverse(tree, function (node, parents) {
+    if (node.type == Syntax.VariableDeclaration) {
+      mass += 1;
+    }
     if (node.type == Syntax.Literal) {
       mass += 1;
     }
