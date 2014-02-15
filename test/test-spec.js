@@ -10,16 +10,19 @@ function traverse(tree, transform) {
 };
 var Syntax = estraverse.Syntax;
 
+VARIABLEDECLARATION = 1;
+LITERAL = 1;
+
 function getMass(code) {
   var mass = 0;
   var tree = esprima.parse(code);
 
   traverse(tree, function (node, parents) {
     if (node.type == Syntax.VariableDeclaration) {
-      mass += 1;
+      mass += VARIABLEDECLARATION;
     }
     if (node.type == Syntax.Literal) {
-      mass += 1;
+      mass += LITERAL;
     }
   });
   return mass;
