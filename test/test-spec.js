@@ -55,10 +55,10 @@ describe('test', function () {
   it('call expression', function () {
     expect(getMass('count()')).toBe(2);
   });
-//
-//  it('call function', function () {
-//    expect(getMass('count(4)')).toBe(3);
-//  });
+
+  it('call expression with literal', function () {
+    expect(getMass('count(4)')).toBe(3);
+  });
 //
 //  it('call instance method without value', function () {
 //    expect(getMass('object.print()')).toBe(3);
