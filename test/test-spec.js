@@ -10,6 +10,7 @@ var traverse = function (tree, transform) {
     }
   });
 };
+var Syntax = estraverse.Syntax;
 }
 
 
