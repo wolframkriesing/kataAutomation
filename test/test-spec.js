@@ -11,6 +11,17 @@ var traverse = function (tree, transform) {
   });
 };
 var Syntax = estraverse.Syntax;
+
+function getMass(code) {
+  var mass = 0;
+  var tree = esprima.parse(code);
+
+  traverse(tree, function (node, parents) {
+    if (node.type == Syntax.Literal) {
+      mass += 1;
+    }
+  });
+  return mass;
 }
 
 
