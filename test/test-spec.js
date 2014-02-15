@@ -34,14 +34,14 @@ describe('test', function() {
     expect(getMass('0')).toBe(1);
   });
 
-//  it('declare variable', function () {
-//    expect(getMass('var x')).toBe(1);
-//  });
-//
+  it('declare variable', function () {
+    expect(getMass('var x')).toBe(1);
+  });
+
 //  it('variabel and constant', function () { //binding
 //    expect(getMass('var x = 0')).toBe(2);
 //  });
-//
+
 //  it('call function', function () {
 //    expect(getMass('count()')).toBe(2);
 //  });
