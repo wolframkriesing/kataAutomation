@@ -85,6 +85,10 @@ describe('test', function () {
   it('while loop without condition', function () {
     expect(getMass('while(false){}')).toBe(massWeight.WHILESTATEMENT + massWeight.LITERAL);
   });
+
+  it('while loop with condition', function () {
+    expect(getMass('while(i<1){}')).toBe(massWeight.WHILESTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+  });
 });
 
 
