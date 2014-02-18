@@ -60,11 +60,11 @@ describe('test', function () {
     expect(true).toBe(true);
   });
 
-  it('constant', function () {
+  it('literal', function () {
     expect(getMass('0')).toBe(massWeight.LITERAL);
   });
 
-  it('declare variable', function () {
+  it('variable declaration', function () {
     expect(getMass('var x')).toBe(massWeight.VARIABLEDECLARATION);
   });
 
@@ -80,24 +80,24 @@ describe('test', function () {
     expect(getMass('count(4)')).toBe(massWeight.CALLEXPRESSION + massWeight.LITERAL);
   });
 
-  it('call instance method without value', function () {
+  it('method expression call without value', function () {
     expect(getMass('object.print()')).toBe(massWeight.MEMBEREXPRESSION);
   });
 
-  it('call instance method with value', function () {
+  it('method expression call with literal', function () {
     expect(getMass('object.print(3)')).toBe(massWeight.MEMBEREXPRESSION + massWeight.LITERAL);
   });
 
-  it('call instance property', function () {
+  it('method expression', function () {
     expect(getMass('object.property')).toBe(massWeight.MEMBEREXPRESSION);
   });
 
   //Loop Examples
-  it('while loop without condition', function () {
+  it('while loop without literal', function () {
     expect(getMass('while(false){}')).toBe(massWeight.WHILESTATEMENT + massWeight.LITERAL);
   });
 
-  it('while loop with condition', function () {
+  it('while loop with binary expression', function () {
     expect(getMass('while(i<1){}')).toBe(massWeight.WHILESTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
 
@@ -109,7 +109,7 @@ describe('test', function () {
     expect(getMass('i = i+1')).toBe(massWeight.ASSIGNMENTEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
 
-  it('call expression and binary expression', function () {
+  it('call expression with binary expression', function () {
     expect(getMass('count(i-1)')).toBe(massWeight.CALLEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
   it('condition', function () {
