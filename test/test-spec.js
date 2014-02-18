@@ -16,7 +16,8 @@ var massWeight = {
   CALLEXPRESSION : 2,
   BINARYEXPRESSION : 2,
   MEMBEREXPRESSION : 3,
-  WHILESTATEMENT : 5
+  WHILESTATEMENT : 5,
+  ASSIGNMENTEXPRESSION : 5
 };
 
 function getMass(code) {
@@ -41,6 +42,10 @@ function getMass(code) {
     }
     if (node.type == Syntax.BinaryExpression) {
       mass += massWeight.BINARYEXPRESSION;
+    }
+
+    if (node.type == Syntax.AssignmentExpression) {
+      mass += massWeight.ASSIGNMENTEXPRESSION;
     }
 
   });
