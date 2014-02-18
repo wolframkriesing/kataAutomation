@@ -91,7 +91,6 @@ describe('test', function () {
   });
 
   //Loop Examples
-
   it('while loop without condition', function () {
     expect(getMass('while(false){}')).toBe(massWeight.WHILESTATEMENT + massWeight.LITERAL);
   });
@@ -102,6 +101,10 @@ describe('test', function () {
 
   it('assignment expression', function () {
     expect(getMass('i = 1')).toBe(massWeight.ASSIGNMENTEXPRESSION + massWeight.LITERAL);
+  });
+
+  it('assignment expression with binary expression', function () {
+    expect(getMass('i = i+1')).toBe(massWeight.ASSIGNMENTEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
 });
 
