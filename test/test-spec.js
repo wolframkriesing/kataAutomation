@@ -7,7 +7,7 @@ function traverse(tree, transform) {
       return transform(node, this.parents());
     }
   });
-};
+}
 var Syntax = estraverse.Syntax;
 
 var massWeight = {
@@ -93,6 +93,10 @@ describe('test', function () {
 
   it('while loop with condition', function () {
     expect(getMass('while(i<1){}')).toBe(massWeight.WHILESTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+  });
+
+  it('assignment expression', function () {
+    expect(getMass('i = 1')).toBe(massWeight.ASSIGNMENTEXPRESSION + massWeight.LITERAL);
   });
 });
 
