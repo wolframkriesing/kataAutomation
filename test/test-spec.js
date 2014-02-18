@@ -106,6 +106,10 @@ describe('test', function () {
   it('assignment expression with binary expression', function () {
     expect(getMass('i = i+1')).toBe(massWeight.ASSIGNMENTEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
+
+  it('call expression and binary expression', function () {
+    expect(getMass('count(i-1)')).toBe(massWeight.CALLEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+  });
 });
 
 
