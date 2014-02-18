@@ -110,6 +110,10 @@ describe('test', function () {
   it('call expression and binary expression', function () {
     expect(getMass('count(i-1)')).toBe(massWeight.CALLEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
+
+  it('condition', function () {
+    expect(getMass('if(false){}')).toBe(massWeight.IFSTATEMENT + massWeight.LITERAL);
+  });
 });
 
 
