@@ -60,11 +60,11 @@ describe('test', function () {
   it('call expression with literal', function () {
     expect(getMass('count(4)')).toBe(massWeight.CALLEXPRESSION + massWeight.LITERAL);
   });
-//
-//  it('call instance method without value', function () {
-//    expect(getMass('object.print()')).toBe(3);
-//  });
-//
+
+  it('call instance method without value', function () {
+    expect(getMass('object.print()')).toBe(massWeight.MEMBEREXPRESSION);
+  });
+
 //  it('call instance method with value', function () {
 //    expect(getMass('object.print(3)')).toBe(4);
 //  });
