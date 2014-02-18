@@ -68,9 +68,9 @@ describe('test', function () {
     expect(getMass('object.print()')).toBe(massWeight.MEMBEREXPRESSION);
   });
 
-//  it('call instance method with value', function () {
-//    expect(getMass('object.print(3)')).toBe(4);
-//  });
+  it('call instance method with value', function () {
+    expect(getMass('object.print(3)')).toBe(massWeight.MEMBEREXPRESSION + massWeight.LITERAL);
+  });
 //
 //    it('call instance property', function () {
 //    expect(getMass('object.property')).toBe(3);
