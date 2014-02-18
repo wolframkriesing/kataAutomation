@@ -15,6 +15,7 @@ var massWeight = {
   LITERAL : 1,
   CALLEXPRESSION : 2,
   MEMBEREXPRESSION : 3
+  WHILESTATEMENT : 5
 };
 
 function getMass(code) {
@@ -33,6 +34,9 @@ function getMass(code) {
     }
     if (node.type == Syntax.MemberExpression) {
       mass += massWeight.MEMBEREXPRESSION;
+    }
+    if (node.type == Syntax.WhileStatement) {
+      mass += massWeight.WHILESTATEMENT;
     }
   });
   return mass;
