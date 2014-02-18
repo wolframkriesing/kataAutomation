@@ -75,6 +75,12 @@ describe('test', function () {
   it('call instance property', function () {
     expect(getMass('object.property')).toBe(massWeight.MEMBEREXPRESSION);
   });
+
+  //Loop Examples
+
+  it('while loop without condition', function () {
+    expect(getMass('while(false){}')).toBe(massWeight.WHILESTATEMENT + massWeight.LITERAL);
+  });
 });
 
 
