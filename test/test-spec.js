@@ -13,7 +13,8 @@ var Syntax = estraverse.Syntax;
 var massWeight = {
   VARIABLEDECLARATION : 1,
   LITERAL : 1,
-  CALLEXPRESSION : 2
+  CALLEXPRESSION : 2,
+  MEMBEREXPRESSION : 3
 };
 
 function getMass(code) {
