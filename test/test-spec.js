@@ -28,7 +28,7 @@ function getMass(code) {
     if (node.type == Syntax.Literal) {
       mass += massWeight.LITERAL;
     }
-    if (node.type == Syntax.CallExpression) {
+    if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
       mass += massWeight.CALLEXPRESSION;
     }
   });
