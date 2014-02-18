@@ -78,6 +78,21 @@ var kataSessions = {
     }
   ]
 };
+
+var entireString;
+var functionBodyString;
+var massOfSession;
+
+for (var i=0; i<kataSessions.sessions.length; i++){
+  entireString = kataSessions.sessions[i].code.toString();
+  functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
+  massOfSession = getMass(functionBodyString);
+  kataSessions.sessions[i].mass = massOfSession;
+}
+
+console.log('Session Mass', kataSessions);
+
+
 describe('test', function () {
   it('test', function () {
     expect(true).toBe(true);
