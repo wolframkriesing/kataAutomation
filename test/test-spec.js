@@ -1,5 +1,7 @@
 var estraverse = require('../node_modules/estraverse/estraverse');
 var esprima = require('../node_modules/esprima/esprima');
+var json2csv = require('json2csv');
+var fs = require('fs');
 
 function traverse(tree, transform) {
   estraverse.traverse(tree, {
@@ -9,26 +11,6 @@ function traverse(tree, transform) {
   });
 }
 var Syntax = estraverse.Syntax;
-
-var massWeight = {
-  VARIABLEDECLARATION: 1,
-  LITERAL: 1,
-  CALLEXPRESSION: 2,
-  BINARYEXPRESSION: 2,
-  MEMBEREXPRESSION: 3,
-  IFSTATEMENT: 4,
-  WHILESTATEMENT: 5,
-  ASSIGNMENTEXPRESSION: 6
-};
-
-var variableDeclartationCounter = 0;
-var literalCounter = 0;
-var callExpressionCounter = 0;
-var binaryExpressionCounter = 0;
-var memberExpressionCounter = 0;
-var ifStatementCounter = 0;
-var whileStatementCounter = 0;
-var assignmentExpressionCounter = 0;
 
 
 function getMass(code) {
@@ -64,6 +46,29 @@ function getMass(code) {
   return mass;
 }
 
+var transformationCounters = [
+  {
+    VariableDeclartationCounter: 0,
+    LiteralCounter: 0,
+    CallExpressionCounter: 0,
+    BinaryExpressionCounter: 0,
+    MemberExpressionCounter: 0,
+    IfStatementCounter: 0,
+    WhileStatementCounter: 0,
+    AssignmentExpressionCounter: 0
+  }
+];
+
+var massWeight = {
+  VARIABLEDECLARATION: 1,
+  LITERAL: 1,
+  CALLEXPRESSION: 2,
+  BINARYEXPRESSION: 2,
+  MEMBEREXPRESSION: 3,
+  IFSTATEMENT: 4,
+  WHILESTATEMENT: 5,
+  ASSIGNMENTEXPRESSION: 6
+};
 
 var kataSessions = {
   sessions: [
@@ -167,6 +172,3 @@ describe('test', function () {
     expect(getMass('if(i>0){}')).toBe(massWeight.IFSTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
 });
-
-
-
