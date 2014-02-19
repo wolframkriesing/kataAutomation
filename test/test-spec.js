@@ -145,7 +145,8 @@ for (var i = 0; i < kataSessions.sessions.length; i++) {
   kataSessions.sessions[i].mass = massOfSession;
 }
 
-console.log('Session Mass', kataSessions);
+console.log('OBJECT', transformationCounters);
+convertJsonToCsv(transformationCounters, 'testFilename2');
 
 
 describe('test', function () {
