@@ -49,29 +49,38 @@ function getMass(code) {
   var tree = esprima.parse(code);
 
   traverse(tree, function (node, parents) {
+
     if (node.type == Syntax.VariableDeclaration) {
       mass += massWeight.VARIABLEDECLARATION;
+      ++(transformationCounters[0].VariableDeclartationCounter);
     }
     if (node.type == Syntax.Literal) {
       mass += massWeight.LITERAL;
+      ++transformationCounters[0].LiteralCounter;
     }
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
       mass += massWeight.CALLEXPRESSION;
+      ++transformationCounters[0].CallExpressionCounter;
     }
     if (node.type == Syntax.MemberExpression) {
       mass += massWeight.MEMBEREXPRESSION;
+      ++transformationCounters[0].MemberExpressionCounter;
     }
     if (node.type == Syntax.WhileStatement) {
       mass += massWeight.WHILESTATEMENT;
+      ++transformationCounters[0].WhileStatementCounter;
     }
     if (node.type == Syntax.BinaryExpression) {
       mass += massWeight.BINARYEXPRESSION;
+      ++transformationCounters[0].BinaryExpressionCounter;
     }
     if (node.type == Syntax.AssignmentExpression) {
       mass += massWeight.ASSIGNMENTEXPRESSION;
+      ++transformationCounters[0].AssignmentExpressionCounter;
     }
     if (node.type == Syntax.IfStatement) {
       mass += massWeight.IFSTATEMENT;
+      ++transformationCounters[0].IfStatementCounter;
     }
   });
   return mass;
