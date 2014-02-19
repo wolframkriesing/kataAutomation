@@ -11,15 +11,25 @@ function traverse(tree, transform) {
 var Syntax = estraverse.Syntax;
 
 var massWeight = {
-  VARIABLEDECLARATION : 1,
-  LITERAL : 1,
-  CALLEXPRESSION : 2,
-  BINARYEXPRESSION : 2,
-  MEMBEREXPRESSION : 3,
+  VARIABLEDECLARATION: 1,
+  LITERAL: 1,
+  CALLEXPRESSION: 2,
+  BINARYEXPRESSION: 2,
+  MEMBEREXPRESSION: 3,
   IFSTATEMENT: 4,
-  WHILESTATEMENT : 5,
-  ASSIGNMENTEXPRESSION : 6
+  WHILESTATEMENT: 5,
+  ASSIGNMENTEXPRESSION: 6
 };
+
+var variableDeclartationCounter = 0;
+var literalCounter = 0;
+var callExpressionCounter = 0;
+var binaryExpressionCounter = 0;
+var memberExpressionCounter = 0;
+var ifStatementCounter = 0;
+var whileStatementCounter = 0;
+var assignmentExpressionCounter = 0;
+
 
 function getMass(code) {
   var mass = 0;
@@ -83,7 +93,7 @@ var entireString;
 var functionBodyString;
 var massOfSession;
 
-for (var i=0; i<kataSessions.sessions.length; i++){
+for (var i = 0; i < kataSessions.sessions.length; i++) {
   entireString = kataSessions.sessions[i].code.toString();
   functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
   massOfSession = getMass(functionBodyString);
