@@ -12,6 +12,37 @@ function traverse(tree, transform) {
 }
 var Syntax = estraverse.Syntax;
 
+function convertJsonToCsv(jsonObject, filename) {
+  json = jsonObject;
+
+  json2csv(
+      {
+        data: json,
+        fields: [
+          'VariableDeclartationCounter',
+          'LiteralCounter',
+          'CallExpressionCounter',
+          'BinaryExpressionCounter',
+          'MemberExpressionCounter',
+          'IfStatementCounter',
+          'WhileStatementCounter',
+          'AssignmentExpressionCounter'
+        ]
+      },
+      function (err, csv) {
+        if (err) {
+          console.log(err);
+        }
+        fs.writeFile(filename + '.csv', csv, function (err) {
+              if (err) {
+                throw err;
+              }
+              console.log('file saved');
+            }
+        );
+      }
+  );
+}
 
 function getMass(code) {
   var mass = 0;
