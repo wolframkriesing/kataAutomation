@@ -217,6 +217,10 @@ describe('test', function () {
     expect(getMass('for (var i=0; i<5; i++){}')).toBe(
         massWeight.FORSTATEMENT + massWeight.VARIABLEDECLARATION + massWeight.LITERAL + massWeight.BINARYEXPRESSION +
         massWeight.LITERAL + massWeight.UPDATEEXPRESSION
+
+  it('for in loop', function () {
+    expect(getMass('for(var property in myObj){}')).toBe(
+        massWeight.FORINSTATEMENT + massWeight.VARIABLEDECLARATION
     );
   });
 
