@@ -220,9 +220,11 @@ describe('test', function () {
   });
 
   it('for loop', function () {
+  it('for loop with binary expression literal', function () {
     expect(getMass('for (var i=0; i<5; i++){}')).toBe(
         massWeight.FORSTATEMENT + massWeight.VARIABLEDECLARATION + massWeight.LITERAL + massWeight.BINARYEXPRESSION +
         massWeight.LITERAL + massWeight.UPDATEEXPRESSION
+    );
 
   it('for in loop', function () {
     expect(getMass('for(var property in myObj){}')).toBe(
