@@ -135,19 +135,23 @@ var kataSessions = {
   ]
 };
 
-var entireString;
-var functionBodyString;
-var massOfSession;
+function getMassOfSessions() {
+  var entireString;
+  var functionBodyString;
+  var massOfSession;
 
-for (var i = 0; i < kataSessions.sessions.length; i++) {
-  entireString = kataSessions.sessions[i].code.toString();
-  functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
-  massOfSession = getMass(functionBodyString);
-  kataSessions.sessions[i].mass = massOfSession;
+  for (var i = 0; i < kataSessions.sessions.length; i++) {
+    entireString = kataSessions.sessions[i].code.toString();
+    functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
+    massOfSession = getMass(functionBodyString);
+    kataSessions.sessions[i].mass = massOfSession;
+    convertJsonToCsv(transformationCounters, kataSessions.sessions[i].name);
+    console.log('TOTAL MASS OF ' + kataSessions.sessions[i].name + ': ', massOfSession);
+    console.log('NUMBER OF EACH TRANSFORMATION: ', transformationCounters);
+  }
 }
 
-console.log('OBJECT', transformationCounters);
-convertJsonToCsv(transformationCounters, 'testFilename2');
+getMassOfSessions();
 
 
 describe('test', function () {
