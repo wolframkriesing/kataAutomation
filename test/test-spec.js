@@ -25,8 +25,13 @@ function convertJsonToCsv(jsonObject, filename) {
           'CallExpressionCounter',
           'BinaryExpressionCounter',
           'MemberExpressionCounter',
+          'SwitchStatementCounter',
+          'SwitchCaseCounter',
+          'BreakStatementCounter',
           'IfStatementCounter',
           'WhileStatementCounter',
+          'ForStatementCounter',
+          'ForInStatementCounter',
           'AssignmentExpressionCounter',
           'UpdateExpressionCounter'
         ]
