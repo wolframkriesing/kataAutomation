@@ -13,6 +13,7 @@ function traverse(tree, transform) {
 var Syntax = estraverse.Syntax;
 
 function convertJsonToCsv(jsonObject, filename) {
+  var filenameAsString = filename.toString();
   json = jsonObject;
 
   json2csv(
@@ -33,7 +34,7 @@ function convertJsonToCsv(jsonObject, filename) {
         if (err) {
           console.log(err);
         }
-        fs.writeFile(filename + '.csv', csv, function (err) {
+        fs.writeFile(filenameAsString + '.csv', csv, function (err) {
               if (err) {
                 throw err;
               }
