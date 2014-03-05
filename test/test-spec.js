@@ -240,12 +240,6 @@ describe('test', function () {
 
   it('while loop with binary expression', function () {
     expect(getMass('while(i<1){}')).toBe(massWeight.WHILESTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
-  it('switch with 2 cases', function () {
-    expect(getMass('switch (expr) {case "Oranges":break;case "Apples":break;default:}'))
-        .toBe(
-            massWeight.SWITCHSTATEMENT + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.BREAKSTATEMENT
-            + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.BREAKSTATEMENT + massWeight.SWITCHCASE
-        );
   });
 
   it('for loop with literal', function () {
@@ -279,10 +273,29 @@ describe('test', function () {
   it('call expression with binary expression', function () {
     expect(getMass('count(i-1)')).toBe(massWeight.CALLEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
+
   it('condition', function () {
     expect(getMass('if(false){}')).toBe(massWeight.IFSTATEMENT + massWeight.LITERAL);
   });
+
   it('condition with binary expression', function () {
     expect(getMass('if(i>0){}')).toBe(massWeight.IFSTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+  });
+
+  it('switch with 2 cases', function () {
+    expect(getMass('switch (expr) {case "Oranges":break;case "Apples":break;default:}'))
+        .toBe(
+            massWeight.SWITCHSTATEMENT + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.BREAKSTATEMENT
+            + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.BREAKSTATEMENT + massWeight.SWITCHCASE
+        );
+  });
+
+  it('switch statement with one case', function () {
+    expect(getMass(
+    'switch (expr) {case "Oranges": console.log("Oranges are $0.59 a pound.");break;}'
+   )).toBe(
+            massWeight.SWITCHSTATEMENT + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.MEMBEREXPRESSION + massWeight.BREAKSTATEMENT
+            + massWeight.LITERAL
+     );
   });
 });
