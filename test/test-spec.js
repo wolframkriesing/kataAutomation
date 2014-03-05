@@ -200,6 +200,13 @@ describe('test', function () {
     expect(getMass('while(i<1){}')).toBe(massWeight.WHILESTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
 
+  it('for loop', function () {
+    expect(getMass('for (var i=0; i<5; i++){}')).toBe(
+        massWeight.FORSTATEMENT + massWeight.VARIABLEDECLARATION + massWeight.BINARYEXPRESSION +
+        massWeight.LITERAL + massWeight.UPDATEEXPRESSION
+    );
+  });
+
   it('assignment expression', function () {
     expect(getMass('i = 1')).toBe(massWeight.ASSIGNMENTEXPRESSION + massWeight.LITERAL);
   });
