@@ -72,6 +72,10 @@ function getMass(code) {
       mass += massWeight.WHILESTATEMENT;
       ++transformationCounters[0].WhileStatementCounter;
     }
+    if (node.type == Syntax.ForStatement) {
+      mass += massWeight.FORSTATEMENT;
+      ++transformationCounters[0].ForStatementCounter;
+    }
     if (node.type == Syntax.BinaryExpression) {
       mass += massWeight.BINARYEXPRESSION;
       ++transformationCounters[0].BinaryExpressionCounter;
@@ -83,6 +87,10 @@ function getMass(code) {
     if (node.type == Syntax.IfStatement) {
       mass += massWeight.IFSTATEMENT;
       ++transformationCounters[0].IfStatementCounter;
+    }
+    if (node.type == Syntax.UpdateExpression) {
+      mass += massWeight.UPDATEEXPRESSION;
+      ++transformationCounters[0].UpdateExpressionCounter;
     }
   });
   return mass;
@@ -111,7 +119,9 @@ var massWeight = {
   MEMBEREXPRESSION: 3,
   IFSTATEMENT: 4,
   WHILESTATEMENT: 5,
-  ASSIGNMENTEXPRESSION: 6
+  FORSTATEMENT: 5,
+  ASSIGNMENTEXPRESSION: 6,
+  UPDATEEXPRESSION: 2
 };
 
 var kataSessions = {
