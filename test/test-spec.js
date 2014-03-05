@@ -222,6 +222,12 @@ describe('test', function () {
 
   it('while loop with binary expression', function () {
     expect(getMass('while(i<1){}')).toBe(massWeight.WHILESTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+  it('switch with 2 cases', function () {
+    expect(getMass('switch (expr) {case "Oranges":break;case "Apples":break;default:}'))
+        .toBe(
+            massWeight.SWITCHSTATEMENT + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.BREAKSTATEMENT
+            + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.BREAKSTATEMENT + massWeight.SWITCHCASE
+        );
   });
 
   it('for loop with literal', function () {
