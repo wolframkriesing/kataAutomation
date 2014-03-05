@@ -76,6 +76,10 @@ function getMass(code) {
       mass += massWeight.FORSTATEMENT;
       ++transformationCounters[0].ForStatementCounter;
     }
+    if (node.type == Syntax.ForInStatement) {
+      mass += massWeight.FORINSTATEMENT;
+      ++transformationCounters[0].ForInStatementCounter;
+    }
     if (node.type == Syntax.BinaryExpression) {
       mass += massWeight.BINARYEXPRESSION;
       ++transformationCounters[0].BinaryExpressionCounter;
@@ -106,6 +110,7 @@ var transformationCounters = [
     IfStatementCounter: 0,
     WhileStatementCounter: 0,
     ForStatementCounter: 0,
+    ForInStatementCounter: 0,
     AssignmentExpressionCounter: 0,
     UpdateExpressionCounter: 0
   }
@@ -120,6 +125,7 @@ var massWeight = {
   IFSTATEMENT: 4,
   WHILESTATEMENT: 5,
   FORSTATEMENT: 5,
+  FORINSTATEMENT: 5,
   ASSIGNMENTEXPRESSION: 6,
   UPDATEEXPRESSION: 2
 };
