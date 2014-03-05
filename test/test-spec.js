@@ -93,6 +93,18 @@ function getMass(code) {
       mass += massWeight.ASSIGNMENTEXPRESSION;
       ++transformationCounters[0].AssignmentExpressionCounter;
     }
+    if (node.type == Syntax.SwitchStatement) {
+      mass += massWeight.SWITCHSTATEMENT;
+      ++transformationCounters[0].SwitchStatementCounter;
+    }
+    if (node.type == Syntax.SwitchCase) {
+      mass += massWeight.SWITCHCASE;
+      ++transformationCounters[0].SwitchCaseCounter;
+    }
+    if (node.type == Syntax.BreakStatement) {
+      mass += massWeight.BREAKSTATEMENT;
+      ++transformationCounters[0].BreakStatementCounter;
+    }
     if (node.type == Syntax.IfStatement) {
       mass += massWeight.IFSTATEMENT;
       ++transformationCounters[0].IfStatementCounter;
@@ -112,6 +124,9 @@ var transformationCounters = [
     CallExpressionCounter: 0,
     BinaryExpressionCounter: 0,
     MemberExpressionCounter: 0,
+    SwitchStatementCounter:3,
+    SwitchCaseCounter: 1,
+    BreakStatementCounter: 1,
     IfStatementCounter: 0,
     WhileStatementCounter: 0,
     ForStatementCounter: 0,
@@ -127,6 +142,9 @@ var massWeight = {
   CALLEXPRESSION: 2,
   BINARYEXPRESSION: 2,
   MEMBEREXPRESSION: 3,
+  SWITCHSTATEMENT:3,
+  SWITCHCASE: 1,
+  BREAKSTATEMENT: 1,
   IFSTATEMENT: 4,
   WHILESTATEMENT: 5,
   FORSTATEMENT: 5,
