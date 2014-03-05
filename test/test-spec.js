@@ -219,8 +219,7 @@ describe('test', function () {
     expect(getMass('while(i<1){}')).toBe(massWeight.WHILESTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
   });
 
-  it('for loop', function () {
-  it('for loop with binary expression literal', function () {
+  it('for loop with literal', function () {
     expect(getMass('for (var i=0; i<5; i++){}')).toBe(
         massWeight.FORSTATEMENT + massWeight.VARIABLEDECLARATION + massWeight.LITERAL + massWeight.BINARYEXPRESSION +
         massWeight.LITERAL + massWeight.UPDATEEXPRESSION
