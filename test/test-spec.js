@@ -27,7 +27,8 @@ function convertJsonToCsv(jsonObject, filename) {
           'MemberExpressionCounter',
           'IfStatementCounter',
           'WhileStatementCounter',
-          'AssignmentExpressionCounter'
+          'AssignmentExpressionCounter',
+          'UpdateExpressionCounter'
         ]
       },
       function (err, csv) {
@@ -96,7 +97,9 @@ var transformationCounters = [
     MemberExpressionCounter: 0,
     IfStatementCounter: 0,
     WhileStatementCounter: 0,
-    AssignmentExpressionCounter: 0
+    ForStatementCounter: 0,
+    AssignmentExpressionCounter: 0,
+    UpdateExpressionCounter: 0
   }
 ];
 
