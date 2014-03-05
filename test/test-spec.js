@@ -202,7 +202,7 @@ describe('test', function () {
 
   it('for loop', function () {
     expect(getMass('for (var i=0; i<5; i++){}')).toBe(
-        massWeight.FORSTATEMENT + massWeight.VARIABLEDECLARATION + massWeight.BINARYEXPRESSION +
+        massWeight.FORSTATEMENT + massWeight.VARIABLEDECLARATION + massWeight.LITERAL + massWeight.BINARYEXPRESSION +
         massWeight.LITERAL + massWeight.UPDATEEXPRESSION
     );
   });
