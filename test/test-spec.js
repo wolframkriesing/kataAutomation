@@ -56,62 +56,62 @@ function getMass(code) {
   var tree = esprima.parse(code);
 
   traverse(tree, function (node, parents) {
-
+//    console.log('NODE TYPE', node.type);
     if (node.type == Syntax.VariableDeclaration) {
       mass += massWeight.VARIABLEDECLARATION;
-      ++(transformationCounters[0].VariableDeclartationCounter);
+      ++(transformationCounters.VariableDeclartationCounter);
     }
     if (node.type == Syntax.Literal) {
       mass += massWeight.LITERAL;
-      ++transformationCounters[0].LiteralCounter;
+      ++transformationCounters.LiteralCounter;
     }
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
       mass += massWeight.CALLEXPRESSION;
-      ++transformationCounters[0].CallExpressionCounter;
+      ++transformationCounters.CallExpressionCounter;
     }
     if (node.type == Syntax.MemberExpression) {
       mass += massWeight.MEMBEREXPRESSION;
-      ++transformationCounters[0].MemberExpressionCounter;
+      ++transformationCounters.MemberExpressionCounter;
     }
     if (node.type == Syntax.WhileStatement) {
       mass += massWeight.WHILESTATEMENT;
-      ++transformationCounters[0].WhileStatementCounter;
+      ++transformationCounters.WhileStatementCounter;
     }
     if (node.type == Syntax.ForStatement) {
       mass += massWeight.FORSTATEMENT;
-      ++transformationCounters[0].ForStatementCounter;
+      ++transformationCounters.ForStatementCounter;
     }
     if (node.type == Syntax.ForInStatement) {
       mass += massWeight.FORINSTATEMENT;
-      ++transformationCounters[0].ForInStatementCounter;
+      ++transformationCounters.ForInStatementCounter;
     }
     if (node.type == Syntax.BinaryExpression) {
       mass += massWeight.BINARYEXPRESSION;
-      ++transformationCounters[0].BinaryExpressionCounter;
+      ++transformationCounters.BinaryExpressionCounter;
     }
     if (node.type == Syntax.AssignmentExpression) {
       mass += massWeight.ASSIGNMENTEXPRESSION;
-      ++transformationCounters[0].AssignmentExpressionCounter;
+      ++transformationCounters.AssignmentExpressionCounter;
     }
     if (node.type == Syntax.SwitchStatement) {
       mass += massWeight.SWITCHSTATEMENT;
-      ++transformationCounters[0].SwitchStatementCounter;
+      ++transformationCounters.SwitchStatementCounter;
     }
     if (node.type == Syntax.SwitchCase) {
       mass += massWeight.SWITCHCASE;
-      ++transformationCounters[0].SwitchCaseCounter;
+      ++transformationCounters.SwitchCaseCounter;
     }
     if (node.type == Syntax.BreakStatement) {
       mass += massWeight.BREAKSTATEMENT;
-      ++transformationCounters[0].BreakStatementCounter;
+      ++transformationCounters.BreakStatementCounter;
     }
     if (node.type == Syntax.IfStatement) {
       mass += massWeight.IFSTATEMENT;
-      ++transformationCounters[0].IfStatementCounter;
+      ++transformationCounters.IfStatementCounter;
     }
     if (node.type == Syntax.UpdateExpression) {
       mass += massWeight.UPDATEEXPRESSION;
-      ++transformationCounters[0].UpdateExpressionCounter;
+      ++transformationCounters.UpdateExpressionCounter;
     }
   });
   return mass;
@@ -149,8 +149,7 @@ var transformationCounters = {
     ForInStatementCounter: 0,
     AssignmentExpressionCounter: 0,
     UpdateExpressionCounter: 0
-  }
-];
+}
 
 var massWeight = {
   VARIABLEDECLARATION: 1,
