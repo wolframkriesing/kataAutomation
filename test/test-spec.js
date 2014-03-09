@@ -202,11 +202,12 @@ function getMassOfSessions() {
     functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
     massOfSession = getMass(functionBodyString);
     kataSessions.sessions[i].mass = massOfSession;
-    convertJsonToCsv(transformationCounters, kataSessions.sessions[i].name);
     console.log('TOTAL MASS OF ' + kataSessions.sessions[i].name + ': ', massOfSession);
-    console.log('NUMBER OF EACH TRANSFORMATION: ', transformationCounters);
+    console.log('NUMBER OF TRANSFORMATION: ', transformationCounters);
+    convertJsonToCsv(transformationCounters, kataSessions.sessions[i].name);
     resetTransormationCounters();
   }
+
 }
 
 getMassOfSessions();
