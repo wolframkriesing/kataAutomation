@@ -117,8 +117,24 @@ function getMass(code) {
   return mass;
 }
 
-var transformationCounters = [
-  {
+function resetTransormationCounters() {
+    transformationCounters.VariableDeclartationCounter = 0,
+    transformationCounters.LiteralCounter = 0,
+    transformationCounters.CallExpressionCounter = 0,
+    transformationCounters.BinaryExpressionCounter = 0,
+    transformationCounters.MemberExpressionCounter = 0,
+    transformationCounters.SwitchStatementCounter = 0,
+    transformationCounters.SwitchCaseCounter = 0,
+    transformationCounters.BreakStatementCounter = 0,
+    transformationCounters.IfStatementCounter = 0,
+    transformationCounters.WhileStatementCounter = 0,
+    transformationCounters.ForStatementCounter = 0,
+    transformationCounters.ForInStatementCounter = 0,
+    transformationCounters.AssignmentExpressionCounter = 0,
+    transformationCounters.UpdateExpressionCounter = 0
+}
+
+var transformationCounters = {
     VariableDeclartationCounter: 0,
     LiteralCounter: 0,
     CallExpressionCounter: 0,
@@ -190,6 +206,7 @@ function getMassOfSessions() {
     convertJsonToCsv(transformationCounters, kataSessions.sessions[i].name);
     console.log('TOTAL MASS OF ' + kataSessions.sessions[i].name + ': ', massOfSession);
     console.log('NUMBER OF EACH TRANSFORMATION: ', transformationCounters);
+    resetTransormationCounters();
   }
 }
 
