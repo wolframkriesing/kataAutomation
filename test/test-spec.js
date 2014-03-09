@@ -171,21 +171,66 @@ var massWeight = {
 var kataSessions = {
   sessions: [
     {
-      name: 'romanNumeralsS1',
+      name: 'romanNumeralsS1 WHILE',
       code: function () {
-        var arabicDigits = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-        var romanDigits = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
-
         var convert = function (arabic) {
-          var roman = "";
+          var map = {
+            1: 'I',
+            4: 'IV',
+            5: 'V',
+            9: 'IX',
+            10: 'X',
+            90: 'XC',
+            100: 'C',
+            500: 'D'
+          };
 
-          for (var i = 0; i < arabicDigits.length; i++) {
-            while (arabic >= arabicDigits[i]) {
-              roman += romanDigits[i];
-              arabic -= arabicDigits[i];
+
+          if (map.hasOwnProperty(arabic)) {
+            return map[arabic]
+          }
+
+          var i = 0;
+          var steps = [500, 100, 10, 5, 1];
+          while (i < steps.length){
+            if (arabic > steps[i]) {
+              return convert(steps[i]) + convert(arabic - steps[i]);
+            }
+            ++i;
+          }
+
+          return 'XX';
+        };
+      }
+    },
+    {
+      name: 'romanNumeralsS1 FOR',
+      code: function () {
+        var convert = function (arabic) {
+          var map = {
+            1: 'I',
+            4: 'IV',
+            5: 'V',
+            9: 'IX',
+            10: 'X',
+            90: 'XC',
+            100: 'C',
+            500: 'D'
+          };
+
+
+          if (map.hasOwnProperty(arabic)) {
+            return map[arabic]
+          }
+
+          var steps = [500, 100, 10, 5, 1];
+          for (var i=0; i<steps.length; i++){
+            if (arabic > steps[i]) {
+              return convert(steps[i]) + convert(arabic - steps[i]);
             }
           }
-          return roman;
+
+          return 'XX';
         };
       }
     }
