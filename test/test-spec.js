@@ -10,6 +10,7 @@ function traverse(tree, transform) {
     }
   });
 }
+
 var Syntax = estraverse.Syntax;
 
 function convertJsonToCsv(jsonObject, filename) {
@@ -51,212 +52,168 @@ function convertJsonToCsv(jsonObject, filename) {
   );
 }
 
-function getMass(code) {
-  var mass = 0;
+function getComplexity(code) {
+  var totalComplexity = 0;
   var tree = esprima.parse(code);
 
   traverse(tree, function (node, parents) {
-//    console.log('NODE TYPE', node.type);
     if (node.type == Syntax.VariableDeclaration) {
-      mass += massWeight.VARIABLEDECLARATION;
-      ++(transformationCounters.VariableDeclartationCounter);
+      totalComplexity += complexities.VARIABLEDECLARATION;
+      ++(qualityMetricCounters.VariableDeclartationCounter);
     }
     if (node.type == Syntax.Literal) {
-      mass += massWeight.LITERAL;
-      ++transformationCounters.LiteralCounter;
+      totalComplexity += complexities.LITERAL;
+      ++qualityMetricCounters.LiteralCounter;
     }
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
-      mass += massWeight.CALLEXPRESSION;
-      ++transformationCounters.CallExpressionCounter;
+      totalComplexity += complexities.CALLEXPRESSION;
+      ++qualityMetricCounters.CallExpressionCounter;
     }
     if (node.type == Syntax.MemberExpression) {
-      mass += massWeight.MEMBEREXPRESSION;
-      ++transformationCounters.MemberExpressionCounter;
+      totalComplexity += complexities.MEMBEREXPRESSION;
+      ++qualityMetricCounters.MemberExpressionCounter;
     }
     if (node.type == Syntax.WhileStatement) {
-      mass += massWeight.WHILESTATEMENT;
-      ++transformationCounters.WhileStatementCounter;
+      totalComplexity += complexities.WHILESTATEMENT;
+      ++qualityMetricCounters.WhileStatementCounter;
     }
     if (node.type == Syntax.ForStatement) {
-      mass += massWeight.FORSTATEMENT;
-      ++transformationCounters.ForStatementCounter;
+      totalComplexity += complexities.FORSTATEMENT;
+      ++qualityMetricCounters.ForStatementCounter;
     }
     if (node.type == Syntax.ForInStatement) {
-      mass += massWeight.FORINSTATEMENT;
-      ++transformationCounters.ForInStatementCounter;
+      totalComplexity += complexities.FORINSTATEMENT;
+      ++qualityMetricCounters.ForInStatementCounter;
     }
     if (node.type == Syntax.BinaryExpression) {
-      mass += massWeight.BINARYEXPRESSION;
-      ++transformationCounters.BinaryExpressionCounter;
+      totalComplexity += complexities.BINARYEXPRESSION;
+      ++qualityMetricCounters.BinaryExpressionCounter;
     }
     if (node.type == Syntax.AssignmentExpression) {
-      mass += massWeight.ASSIGNMENTEXPRESSION;
-      ++transformationCounters.AssignmentExpressionCounter;
+      totalComplexity += complexities.ASSIGNMENTEXPRESSION;
+      ++qualityMetricCounters.AssignmentExpressionCounter;
     }
     if (node.type == Syntax.SwitchStatement) {
-      mass += massWeight.SWITCHSTATEMENT;
-      ++transformationCounters.SwitchStatementCounter;
+      totalComplexity += complexities.SWITCHSTATEMENT;
+      ++qualityMetricCounters.SwitchStatementCounter;
     }
     if (node.type == Syntax.SwitchCase) {
-      mass += massWeight.SWITCHCASE;
-      ++transformationCounters.SwitchCaseCounter;
+      totalComplexity += complexities.SWITCHCASE;
+      ++qualityMetricCounters.SwitchCaseCounter;
     }
     if (node.type == Syntax.BreakStatement) {
-      mass += massWeight.BREAKSTATEMENT;
-      ++transformationCounters.BreakStatementCounter;
+      totalComplexity += complexities.BREAKSTATEMENT;
+      ++qualityMetricCounters.BreakStatementCounter;
     }
     if (node.type == Syntax.IfStatement) {
-      mass += massWeight.IFSTATEMENT;
-      ++transformationCounters.IfStatementCounter;
+      totalComplexity += complexities.IFSTATEMENT;
+      ++qualityMetricCounters.IfStatementCounter;
     }
     if (node.type == Syntax.UpdateExpression) {
-      mass += massWeight.UPDATEEXPRESSION;
-      ++transformationCounters.UpdateExpressionCounter;
+      totalComplexity += complexities.UPDATEEXPRESSION;
+      ++qualityMetricCounters.UpdateExpressionCounter;
     }
   });
-  return mass;
+  return totalComplexity;
 }
 
-function resetTransormationCounters() {
-    transformationCounters.VariableDeclartationCounter = 0,
-    transformationCounters.LiteralCounter = 0,
-    transformationCounters.CallExpressionCounter = 0,
-    transformationCounters.BinaryExpressionCounter = 0,
-    transformationCounters.MemberExpressionCounter = 0,
-    transformationCounters.SwitchStatementCounter = 0,
-    transformationCounters.SwitchCaseCounter = 0,
-    transformationCounters.BreakStatementCounter = 0,
-    transformationCounters.IfStatementCounter = 0,
-    transformationCounters.WhileStatementCounter = 0,
-    transformationCounters.ForStatementCounter = 0,
-    transformationCounters.ForInStatementCounter = 0,
-    transformationCounters.AssignmentExpressionCounter = 0,
-    transformationCounters.UpdateExpressionCounter = 0
+function resetQualityMetricCounters() {
+  qualityMetricCounters.VariableDeclartationCounter = 0,
+      qualityMetricCounters.LiteralCounter = 0,
+      qualityMetricCounters.CallExpressionCounter = 0,
+      qualityMetricCounters.BinaryExpressionCounter = 0,
+      qualityMetricCounters.MemberExpressionCounter = 0,
+      qualityMetricCounters.SwitchStatementCounter = 0,
+      qualityMetricCounters.SwitchCaseCounter = 0,
+      qualityMetricCounters.BreakStatementCounter = 0,
+      qualityMetricCounters.IfStatementCounter = 0,
+      qualityMetricCounters.WhileStatementCounter = 0,
+      qualityMetricCounters.ForStatementCounter = 0,
+      qualityMetricCounters.ForInStatementCounter = 0,
+      qualityMetricCounters.AssignmentExpressionCounter = 0,
+      qualityMetricCounters.UpdateExpressionCounter = 0
 }
 
-var transformationCounters = {
-    VariableDeclartationCounter: 0,
-    LiteralCounter: 0,
-    CallExpressionCounter: 0,
-    BinaryExpressionCounter: 0,
-    MemberExpressionCounter: 0,
-    SwitchStatementCounter: 0,
-    SwitchCaseCounter: 0,
-    BreakStatementCounter: 0,
-    IfStatementCounter: 0,
-    WhileStatementCounter: 0,
-    ForStatementCounter: 0,
-    ForInStatementCounter: 0,
-    AssignmentExpressionCounter: 0,
-    UpdateExpressionCounter: 0
+var qualityMetricCounters = {
+  VariableDeclartationCounter: 0,
+  LiteralCounter: 0,
+  CallExpressionCounter: 0,
+  BinaryExpressionCounter: 0,
+  MemberExpressionCounter: 0,
+  SwitchStatementCounter: 0,
+  SwitchCaseCounter: 0,
+  BreakStatementCounter: 0,
+  IfStatementCounter: 0,
+  WhileStatementCounter: 0,
+  ForStatementCounter: 0,
+  ForInStatementCounter: 0,
+  AssignmentExpressionCounter: 0,
+  UpdateExpressionCounter: 0
 }
 
-var massWeight = {
+var complexities = {
   VARIABLEDECLARATION: 1,
   LITERAL: 1,
   CALLEXPRESSION: 2,
   BINARYEXPRESSION: 2,
+  UPDATEEXPRESSION: 2,
   MEMBEREXPRESSION: 3,
-  SWITCHSTATEMENT:3,
+  SWITCHSTATEMENT: 3,
   SWITCHCASE: 1,
   BREAKSTATEMENT: 1,
   IFSTATEMENT: 4,
   WHILESTATEMENT: 5,
   FORSTATEMENT: 5,
   FORINSTATEMENT: 5,
-  ASSIGNMENTEXPRESSION: 6,
-  UPDATEEXPRESSION: 2
+  ASSIGNMENTEXPRESSION: 6
 };
 
 var kataSessions = {
   sessions: [
     {
-      name: 'romanNumeralsS1 WHILE',
+      name: 'romanNumerals',
       code: function () {
+        var arabicDigits = [10, 5, 1];
+        var romanDigits = ['X', 'V', 'I'];
+
         var convert = function (arabic) {
-          var map = {
-            1: 'I',
-            4: 'IV',
-            5: 'V',
-            9: 'IX',
-            10: 'X',
-            90: 'XC',
-            100: 'C',
-            500: 'D'
-          };
+          var roman = "";
 
-
-          if (map.hasOwnProperty(arabic)) {
-            return map[arabic]
-          }
-
-          var i = 0;
-          var steps = [500, 100, 10, 5, 1];
-          while (i < steps.length){
-            if (arabic > steps[i]) {
-              return convert(steps[i]) + convert(arabic - steps[i]);
-            }
-            ++i;
-          }
-
-          return 'XX';
-        };
-      }
-    },
-    {
-      name: 'romanNumeralsS1 FOR',
-      code: function () {
-        var convert = function (arabic) {
-          var map = {
-            1: 'I',
-            4: 'IV',
-            5: 'V',
-            9: 'IX',
-            10: 'X',
-            90: 'XC',
-            100: 'C',
-            500: 'D'
-          };
-
-
-          if (map.hasOwnProperty(arabic)) {
-            return map[arabic]
-          }
-
-          var steps = [500, 100, 10, 5, 1];
-          for (var i=0; i<steps.length; i++){
-            if (arabic > steps[i]) {
-              return convert(steps[i]) + convert(arabic - steps[i]);
+          for (var i = 0; i < arabicDigits.length; i++) {
+            while (arabic >= arabicDigits[i]) {
+              roman += romanDigits[i];
+              arabic -= arabicDigits[i];
             }
           }
-
-          return 'XX';
+          return roman;
         };
       }
     }
   ]
 };
 
-function getMassOfSessions() {
+function getComplexityOfSessions() {
   var entireString;
   var functionBodyString;
-  var massOfSession;
+  var complexityOfSession;
 
   for (var i = 0; i < kataSessions.sessions.length; i++) {
+    //extracts only the content between code: function () {}
     entireString = kataSessions.sessions[i].code.toString();
     functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
-    massOfSession = getMass(functionBodyString);
-    kataSessions.sessions[i].mass = massOfSession;
-    console.log('TOTAL MASS OF ' + kataSessions.sessions[i].name + ': ', massOfSession);
-    console.log('NUMBER OF TRANSFORMATION: ', transformationCounters);
-    convertJsonToCsv(transformationCounters, kataSessions.sessions[i].name);
-    resetTransormationCounters();
-  }
 
+    complexityOfSession = getComplexity(functionBodyString);
+    kataSessions.sessions[i].complexityOfSession = complexityOfSession;
+
+    console.log('TOTAL COMPLEXITY OF ' + kataSessions.sessions[i].name + ': ', complexityOfSession);
+    console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricCounters);
+
+    convertJsonToCsv(qualityMetricCounters, kataSessions.sessions[i].name);
+    resetQualityMetricCounters();
+  }
 }
 
-getMassOfSessions();
-
+getComplexityOfSessions();
 
 describe('test', function () {
   it('test', function () {
@@ -264,100 +221,99 @@ describe('test', function () {
   });
 
   it('literal', function () {
-    expect(getMass('0')).toBe(massWeight.LITERAL);
+    expect(getComplexity('0')).toBe(complexities.LITERAL);
   });
 
   it('variable declaration', function () {
-    expect(getMass('var x')).toBe(massWeight.VARIABLEDECLARATION);
+    expect(getComplexity('var x')).toBe(complexities.VARIABLEDECLARATION);
   });
 
   it('variabel declaration and literal', function () {
-    expect(getMass('var x = 0')).toBe(massWeight.VARIABLEDECLARATION + massWeight.LITERAL);
+    expect(getComplexity('var x = 0')).toBe(complexities.VARIABLEDECLARATION + complexities.LITERAL);
   });
 
   it('call expression', function () {
-    expect(getMass('count()')).toBe(massWeight.CALLEXPRESSION);
+    expect(getComplexity('count()')).toBe(complexities.CALLEXPRESSION);
   });
 
   it('call expression with literal', function () {
-    expect(getMass('count(4)')).toBe(massWeight.CALLEXPRESSION + massWeight.LITERAL);
+    expect(getComplexity('count(4)')).toBe(complexities.CALLEXPRESSION + complexities.LITERAL);
   });
 
   it('method expression call without value', function () {
-    expect(getMass('object.print()')).toBe(massWeight.MEMBEREXPRESSION);
+    expect(getComplexity('object.print()')).toBe(complexities.MEMBEREXPRESSION);
   });
 
   it('method expression call with literal', function () {
-    expect(getMass('object.print(3)')).toBe(massWeight.MEMBEREXPRESSION + massWeight.LITERAL);
+    expect(getComplexity('object.print(3)')).toBe(complexities.MEMBEREXPRESSION + complexities.LITERAL);
   });
 
   it('method expression', function () {
-    expect(getMass('object.property')).toBe(massWeight.MEMBEREXPRESSION);
+    expect(getComplexity('object.property')).toBe(complexities.MEMBEREXPRESSION);
   });
 
-  //Loop Examples
   it('while loop without literal', function () {
-    expect(getMass('while(false){}')).toBe(massWeight.WHILESTATEMENT + massWeight.LITERAL);
+    expect(getComplexity('while(false){}')).toBe(complexities.WHILESTATEMENT + complexities.LITERAL);
   });
 
   it('while loop with binary expression', function () {
-    expect(getMass('while(i<1){}')).toBe(massWeight.WHILESTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+    expect(getComplexity('while(i<1){}')).toBe(complexities.WHILESTATEMENT + complexities.BINARYEXPRESSION + complexities.LITERAL);
   });
 
   it('for loop with literal', function () {
-    expect(getMass('for (var i=0; i<5; i++){}')).toBe(
-        massWeight.FORSTATEMENT + massWeight.VARIABLEDECLARATION + massWeight.LITERAL + massWeight.BINARYEXPRESSION +
-        massWeight.LITERAL + massWeight.UPDATEEXPRESSION
+    expect(getComplexity('for (var i=0; i<5; i++){}')).toBe(
+        complexities.FORSTATEMENT + complexities.VARIABLEDECLARATION + complexities.LITERAL + complexities.BINARYEXPRESSION +
+            complexities.LITERAL + complexities.UPDATEEXPRESSION
     );
   });
 
   it('for loop with member expression', function () {
-    expect(getMass('for (var i=0; i<arr.length; i++){}')).toBe(
-        massWeight.FORSTATEMENT + massWeight.VARIABLEDECLARATION + massWeight.LITERAL + massWeight.BINARYEXPRESSION +
-        massWeight.MEMBEREXPRESSION + massWeight.UPDATEEXPRESSION
+    expect(getComplexity('for (var i=0; i<arr.length; i++){}')).toBe(
+        complexities.FORSTATEMENT + complexities.VARIABLEDECLARATION + complexities.LITERAL + complexities.BINARYEXPRESSION +
+            complexities.MEMBEREXPRESSION + complexities.UPDATEEXPRESSION
     );
   });
 
   it('for in loop', function () {
-    expect(getMass('for(var property in myObj){}')).toBe(
-        massWeight.FORINSTATEMENT + massWeight.VARIABLEDECLARATION
+    expect(getComplexity('for(var property in myObj){}')).toBe(
+        complexities.FORINSTATEMENT + complexities.VARIABLEDECLARATION
     );
   });
 
   it('assignment expression', function () {
-    expect(getMass('i = 1')).toBe(massWeight.ASSIGNMENTEXPRESSION + massWeight.LITERAL);
+    expect(getComplexity('i = 1')).toBe(complexities.ASSIGNMENTEXPRESSION + complexities.LITERAL);
   });
 
   it('assignment expression with binary expression', function () {
-    expect(getMass('i = i+1')).toBe(massWeight.ASSIGNMENTEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+    expect(getComplexity('i = i+1')).toBe(complexities.ASSIGNMENTEXPRESSION + complexities.BINARYEXPRESSION + complexities.LITERAL);
   });
 
   it('call expression with binary expression', function () {
-    expect(getMass('count(i-1)')).toBe(massWeight.CALLEXPRESSION + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+    expect(getComplexity('count(i-1)')).toBe(complexities.CALLEXPRESSION + complexities.BINARYEXPRESSION + complexities.LITERAL);
   });
 
   it('condition', function () {
-    expect(getMass('if(false){}')).toBe(massWeight.IFSTATEMENT + massWeight.LITERAL);
+    expect(getComplexity('if(false){}')).toBe(complexities.IFSTATEMENT + complexities.LITERAL);
   });
 
   it('condition with binary expression', function () {
-    expect(getMass('if(i>0){}')).toBe(massWeight.IFSTATEMENT + massWeight.BINARYEXPRESSION + massWeight.LITERAL);
+    expect(getComplexity('if(i>0){}')).toBe(complexities.IFSTATEMENT + complexities.BINARYEXPRESSION + complexities.LITERAL);
   });
 
   it('switch with 2 cases', function () {
-    expect(getMass('switch (expr) {case "Oranges":break;case "Apples":break;default:}'))
+    expect(getComplexity('switch (expr) {case "Oranges":break;case "Apples":break;default:}'))
         .toBe(
-            massWeight.SWITCHSTATEMENT + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.BREAKSTATEMENT
-            + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.BREAKSTATEMENT + massWeight.SWITCHCASE
+            complexities.SWITCHSTATEMENT + complexities.SWITCHCASE + complexities.LITERAL + complexities.BREAKSTATEMENT
+                + complexities.SWITCHCASE + complexities.LITERAL + complexities.BREAKSTATEMENT + complexities.SWITCHCASE
         );
   });
 
   it('switch statement with one case', function () {
-    expect(getMass(
-    'switch (expr) {case "Oranges": console.log("Oranges are $0.59 a pound.");break;}'
-   )).toBe(
-            massWeight.SWITCHSTATEMENT + massWeight.SWITCHCASE + massWeight.LITERAL + massWeight.MEMBEREXPRESSION + massWeight.BREAKSTATEMENT
-            + massWeight.LITERAL
-     );
+    expect(getComplexity(
+        'switch (expr) {case "Oranges": console.log("Oranges are $0.59 a pound.");break;}'))
+        .toBe(
+            complexities.SWITCHSTATEMENT + complexities.SWITCHCASE + complexities.LITERAL + complexities.MEMBEREXPRESSION + complexities.BREAKSTATEMENT
+                + complexities.LITERAL
+        );
   });
 });
