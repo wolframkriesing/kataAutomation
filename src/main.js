@@ -55,18 +55,25 @@ function convertJsonToCsv(jsonObject, filename) {
   );
 }
 
+var metrics = {};
+metrics[Syntax.VariableDeclaration] = {
+  complexity: complexities.VARIABLEDECLARATION,
+  qualityMetricCounters: qualityMetricCounters.VariableDeclartationCounter
+}
+metrics[Syntax.Literal] = {
+  complexity: complexities.LITERAL,
+  qualityMetricCounters: qualityMetricCounters.LiteralCounter
+}
+
 function getComplexity(code) {
   var totalComplexity = 0;
   var tree = esprima.parse(code);
 
   traverse(tree, function (node, parents) {
-    if (node.type == Syntax.VariableDeclaration) {
-      totalComplexity += complexities.VARIABLEDECLARATION;
-      ++(qualityMetricCounters.VariableDeclartationCounter);
-    }
-    if (node.type == Syntax.Literal) {
-      totalComplexity += complexities.LITERAL;
-      ++qualityMetricCounters.LiteralCounter;
+    var nodeToAnalyze = metrics[node.type];
+    if (nodeToAnalyze) {
+      totalComplexity += nodeToAnalyze.complexity;
+      ++(nodeToAnalyze.qualityMetricCounters);
     }
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
       totalComplexity += complexities.CALLEXPRESSION;
