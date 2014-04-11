@@ -70,24 +70,34 @@ metrics[Syntax.UpdateExpression] = {
 };
 
 function calcComplexity(nodeToAnalyze) {
+  if (!nodeToAnalyze) {
+    return 0;
+  }
   ++(nodeToAnalyze.qualityMetricCounters);
   return nodeToAnalyze.complexity;
 }
 
-function getComplexityOfNode(node, nodeToAnalyze) {
-  if (nodeToAnalyze) {
-    return calcComplexity(nodeToAnalyze);
-  }
-  if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
-    return calcComplexity({complexity: complexities.CALLEXPRESSION, qualityMetricCounters: qualityMetricCounters.CallExpressionCounter});
+function calcComplexityForCallExpression(node) {
+  var calleeIsMemberExpression = node.callee.type == Syntax.MemberExpression;
+  if (!calleeIsMemberExpression) {
+    var callNode = {complexity: complexities.CALLEXPRESSION, qualityMetricCounters: qualityMetricCounters.CallExpressionCounter};
+    return calcComplexity(callNode);
   }
   return 0;
+}
+
+function getComplexityOfNode(node) {
+  var isCallExpression = node.type == Syntax.CallExpression;
+  if (isCallExpression) {
+    return calcComplexityForCallExpression(node);
+  }
+  return calcComplexity(metrics[node.type]);
 }
 
 function getComplexityOfParsedTree(tree) {
   var totalComplexity = 0;
   traverse(tree, function(node) {
-    totalComplexity += getComplexityOfNode(node, metrics[node.type]);
+    totalComplexity += getComplexityOfNode(node);
   });
   return totalComplexity;
 }
