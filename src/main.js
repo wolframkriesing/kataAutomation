@@ -69,25 +69,25 @@ metrics[Syntax.UpdateExpression] = {
   qualityMetricCounters: qualityMetricCounters.UpdateExpressionCounter
 };
 
-function getComplexityOfNode(node) {
-  var complexity = 0;
-  var nodeType = node.type;
-  var nodeToAnalyze = metrics[nodeType];
+function calcComplexity(nodeToAnalyze) {
+  ++(nodeToAnalyze.qualityMetricCounters);
+  return nodeToAnalyze.complexity;
+}
+
+function getComplexityOfNode(node, nodeToAnalyze) {
   if (nodeToAnalyze) {
-    complexity = nodeToAnalyze.complexity;
-    ++(nodeToAnalyze.qualityMetricCounters);
+    return calcComplexity(nodeToAnalyze);
   }
-  if (nodeType == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
-    complexity = complexities.CALLEXPRESSION;
-    ++qualityMetricCounters.CallExpressionCounter;
+  if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
+    return calcComplexity({complexity: complexities.CALLEXPRESSION, qualityMetricCounters: qualityMetricCounters.CallExpressionCounter});
   }
-  return complexity;
+  return 0;
 }
 
 function getComplexityOfParsedTree(tree) {
   var totalComplexity = 0;
   traverse(tree, function(node) {
-    totalComplexity += getComplexityOfNode(node);
+    totalComplexity += getComplexityOfNode(node, metrics[node.type]);
   });
   return totalComplexity;
 }
