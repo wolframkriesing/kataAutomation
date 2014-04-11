@@ -88,6 +88,26 @@ metrics[Syntax.AssignmentExpression] = {
   complexity: complexities.ASSIGNMENTEXPRESSION,
   qualityMetricCounters: qualityMetricCounters.AssignmentExpressionCounter
 };
+metrics[Syntax.SwitchStatement] = {
+  complexity: complexities.SWITCHSTATEMENT,
+  qualityMetricCounters: qualityMetricCounters.SwitchStatementCounter
+};
+metrics[Syntax.SwitchCase] = {
+  complexity: complexities.SWITCHCASE,
+  qualityMetricCounters: qualityMetricCounters.SwitchCaseCounter
+};
+metrics[Syntax.BreakStatement] = {
+  complexity: complexities.BREAKSTATEMENT,
+  qualityMetricCounters: qualityMetricCounters.BreakStatementCounter
+};
+metrics[Syntax.IfStatement] = {
+  complexity: complexities.IFSTATEMENT,
+  qualityMetricCounters: qualityMetricCounters.IfStatementCounter
+};
+metrics[Syntax.UpdateExpression] = {
+  complexity: complexities.UPDATEEXPRESSION,
+  qualityMetricCounters: qualityMetricCounters.UpdateExpressionCounter
+};
 
 function getComplexity(code) {
   var totalComplexity = 0;
@@ -102,26 +122,6 @@ function getComplexity(code) {
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
       totalComplexity += complexities.CALLEXPRESSION;
       ++qualityMetricCounters.CallExpressionCounter;
-    }
-    if (node.type == Syntax.SwitchStatement) {
-      totalComplexity += complexities.SWITCHSTATEMENT;
-      ++qualityMetricCounters.SwitchStatementCounter;
-    }
-    if (node.type == Syntax.SwitchCase) {
-      totalComplexity += complexities.SWITCHCASE;
-      ++qualityMetricCounters.SwitchCaseCounter;
-    }
-    if (node.type == Syntax.BreakStatement) {
-      totalComplexity += complexities.BREAKSTATEMENT;
-      ++qualityMetricCounters.BreakStatementCounter;
-    }
-    if (node.type == Syntax.IfStatement) {
-      totalComplexity += complexities.IFSTATEMENT;
-      ++qualityMetricCounters.IfStatementCounter;
-    }
-    if (node.type == Syntax.UpdateExpression) {
-      totalComplexity += complexities.UPDATEEXPRESSION;
-      ++qualityMetricCounters.UpdateExpressionCounter;
     }
   });
   return totalComplexity;
