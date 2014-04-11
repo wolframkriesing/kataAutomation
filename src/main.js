@@ -71,26 +71,30 @@ metrics[Syntax.UpdateExpression] = {
 
 function getComplexityOfNode(node) {
   var complexity = 0;
-  var nodeToAnalyze = metrics[node.type];
+  var nodeType = node.type;
+  var nodeToAnalyze = metrics[nodeType];
   if (nodeToAnalyze) {
     complexity = nodeToAnalyze.complexity;
     ++(nodeToAnalyze.qualityMetricCounters);
   }
-  if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
+  if (nodeType == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
     complexity = complexities.CALLEXPRESSION;
     ++qualityMetricCounters.CallExpressionCounter;
   }
   return complexity;
 }
 
-function getComplexity(code) {
+function getComplexityOfParsedTree(tree) {
   var totalComplexity = 0;
-  var tree = esprima.parse(code);
-
-  traverse(tree, function (node, parents) {
+  traverse(tree, function(node) {
     totalComplexity += getComplexityOfNode(node);
   });
   return totalComplexity;
+}
+
+function getComplexity(code) {
+  var tree = esprima.parse(code);
+  return getComplexityOfParsedTree(tree);
 }
 
 module.exports = {
