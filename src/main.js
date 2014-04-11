@@ -168,30 +168,6 @@ var complexities = {
   ASSIGNMENTEXPRESSION: 6
 };
 
-var kataSessions = {
-  sessions: [
-    {
-      name: 'romanNumerals',
-      code: function () {
-        var arabicDigits = [10, 5, 1];
-        var romanDigits = ['X', 'V', 'I'];
-
-        var convert = function (arabic) {
-          var roman = "";
-
-          for (var i = 0; i < arabicDigits.length; i++) {
-            while (arabic >= arabicDigits[i]) {
-              roman += romanDigits[i];
-              arabic -= arabicDigits[i];
-            }
-          }
-          return roman;
-        };
-      }
-    }
-  ]
-};
-
 function getComplexityOfSessions() {
   var entireString;
   var functionBodyString;
@@ -212,8 +188,6 @@ function getComplexityOfSessions() {
     resetQualityMetricCounters();
   }
 }
-
-getComplexityOfSessions();
 
 module.exports = {
   getComplexity: getComplexity,
