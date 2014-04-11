@@ -59,11 +59,35 @@ var metrics = {};
 metrics[Syntax.VariableDeclaration] = {
   complexity: complexities.VARIABLEDECLARATION,
   qualityMetricCounters: qualityMetricCounters.VariableDeclartationCounter
-}
+};
 metrics[Syntax.Literal] = {
   complexity: complexities.LITERAL,
   qualityMetricCounters: qualityMetricCounters.LiteralCounter
-}
+};
+metrics[Syntax.MemberExpression] = {
+  complexity: complexities.MEMBEREXPRESSION,
+  qualityMetricCounters: qualityMetricCounters.MemberExpressionCounter
+};
+metrics[Syntax.WhileStatement] = {
+  complexity: complexities.WHILESTATEMENT,
+  qualityMetricCounters: qualityMetricCounters.WhileStatementCounter
+};
+metrics[Syntax.ForStatement] = {
+  complexity: complexities.FORSTATEMENT,
+  qualityMetricCounters: qualityMetricCounters.ForStatementCounter
+};
+metrics[Syntax.ForInStatement] = {
+  complexity: complexities.FORINSTATEMENT,
+  qualityMetricCounters: qualityMetricCounters.ForInStatementCounter
+};
+metrics[Syntax.BinaryExpression] = {
+  complexity: complexities.BINARYEXPRESSION,
+  qualityMetricCounters: qualityMetricCounters.BinaryExpressionCounter
+};
+metrics[Syntax.AssignmentExpression] = {
+  complexity: complexities.ASSIGNMENTEXPRESSION,
+  qualityMetricCounters: qualityMetricCounters.AssignmentExpressionCounter
+};
 
 function getComplexity(code) {
   var totalComplexity = 0;
@@ -78,30 +102,6 @@ function getComplexity(code) {
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
       totalComplexity += complexities.CALLEXPRESSION;
       ++qualityMetricCounters.CallExpressionCounter;
-    }
-    if (node.type == Syntax.MemberExpression) {
-      totalComplexity += complexities.MEMBEREXPRESSION;
-      ++qualityMetricCounters.MemberExpressionCounter;
-    }
-    if (node.type == Syntax.WhileStatement) {
-      totalComplexity += complexities.WHILESTATEMENT;
-      ++qualityMetricCounters.WhileStatementCounter;
-    }
-    if (node.type == Syntax.ForStatement) {
-      totalComplexity += complexities.FORSTATEMENT;
-      ++qualityMetricCounters.ForStatementCounter;
-    }
-    if (node.type == Syntax.ForInStatement) {
-      totalComplexity += complexities.FORINSTATEMENT;
-      ++qualityMetricCounters.ForInStatementCounter;
-    }
-    if (node.type == Syntax.BinaryExpression) {
-      totalComplexity += complexities.BINARYEXPRESSION;
-      ++qualityMetricCounters.BinaryExpressionCounter;
-    }
-    if (node.type == Syntax.AssignmentExpression) {
-      totalComplexity += complexities.ASSIGNMENTEXPRESSION;
-      ++qualityMetricCounters.AssignmentExpressionCounter;
     }
     if (node.type == Syntax.SwitchStatement) {
       totalComplexity += complexities.SWITCHSTATEMENT;
