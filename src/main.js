@@ -77,18 +77,21 @@ function calcComplexity(nodeToAnalyze) {
   return nodeToAnalyze.complexity;
 }
 
-function calcComplexityForCallExpression(node) {
-  var calleeIsMemberExpression = node.callee.type == Syntax.MemberExpression;
-  if (!calleeIsMemberExpression) {
-    var callNode = {complexity: complexities.CALLEXPRESSION, qualityMetricCounters: qualityMetricCounters.CallExpressionCounter};
-    return calcComplexity(callNode);
+function calcComplexityForCallExpression() {
+  var callNode = {complexity: complexities.CALLEXPRESSION, qualityMetricCounters: qualityMetricCounters.CallExpressionCounter};
+  return calcComplexity(callNode);
+}
+
+function isCallExpressionToBeAnalyzed(node) {
+  var isCallExpression = node.type == Syntax.CallExpression;
+  if (isCallExpression) {
+    return node.callee.type != Syntax.MemberExpression;
   }
-  return 0;
+  return  false;
 }
 
 function getComplexityOfNode(node) {
-  var isCallExpression = node.type == Syntax.CallExpression;
-  if (isCallExpression) {
+  if (isCallExpressionToBeAnalyzed(node)) {
     return calcComplexityForCallExpression(node);
   }
   return calcComplexity(metrics[node.type]);
