@@ -22,4 +22,20 @@ var kataSessions = {
   ]
 };
 
-module.exports = kataSessions;
+function getComplexityOfSessions() {
+  var entireString;
+  var functionBodyString;
+  var complexityOfSession;
+
+  for (var i = 0; i < kataSessions.sessions.length; i++) {
+    //extracts only the content between code: function () {}
+    entireString = kataSessions.sessions[i].code.toString();
+    functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
+
+    complexityOfSession = getComplexity(functionBodyString);
+    kataSessions.sessions[i].complexityOfSession = complexityOfSession;
+
+    convertJsonToCsv(qualityMetricCounters, kataSessions.sessions[i].name);
+    resetQualityMetricCounters();
+  }
+}
