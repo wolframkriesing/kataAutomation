@@ -1,0 +1,35 @@
+{
+  "name": "kataMetrics",
+  "version": "0.0.1",
+  "description": "Measure code quality via APP metrics",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "esprima": "^1.1.1",
+    "estraverse": "^1.5.0",
+    "jasmine-node": "^1.13.1",
+    "json2csv": "^2.2.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.3"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/georglang/kataAutomation.git"
+  },
+  "keywords": [
+    "tpp",
+    "tdd"
+  ],
+  "author": "Georg Lang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/georglang/kataAutomation/issues"
+  },
+  "homepage": "https://github.com/georglang/kataAutomation"
+}
