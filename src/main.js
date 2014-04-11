@@ -109,20 +109,26 @@ metrics[Syntax.UpdateExpression] = {
   qualityMetricCounters: qualityMetricCounters.UpdateExpressionCounter
 };
 
+function getComplexityOfNode(node) {
+  var complexity = 0;
+  var nodeToAnalyze = metrics[node.type];
+  if (nodeToAnalyze) {
+    complexity = nodeToAnalyze.complexity;
+    ++(nodeToAnalyze.qualityMetricCounters);
+  }
+  if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
+    complexity = complexities.CALLEXPRESSION;
+    ++qualityMetricCounters.CallExpressionCounter;
+  }
+  return complexity;
+}
+
 function getComplexity(code) {
   var totalComplexity = 0;
   var tree = esprima.parse(code);
 
   traverse(tree, function (node, parents) {
-    var nodeToAnalyze = metrics[node.type];
-    if (nodeToAnalyze) {
-      totalComplexity += nodeToAnalyze.complexity;
-      ++(nodeToAnalyze.qualityMetricCounters);
-    }
-    if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
-      totalComplexity += complexities.CALLEXPRESSION;
-      ++qualityMetricCounters.CallExpressionCounter;
-    }
+    totalComplexity += getComplexityOfNode(node);
   });
   return totalComplexity;
 }
