@@ -3,6 +3,9 @@ var esprima = require('../node_modules/esprima/esprima');
 var json2csv = require('json2csv');
 var fs = require('fs');
 
+var complexities = require('./complexities');
+var qualityMetricCounters = require('./qualityMetricsCounters');
+
 function traverse(tree, transform) {
   estraverse.traverse(tree, {
     enter: function (node) {
@@ -133,40 +136,6 @@ function resetQualityMetricCounters() {
       qualityMetricCounters.AssignmentExpressionCounter = 0,
       qualityMetricCounters.UpdateExpressionCounter = 0
 }
-
-var qualityMetricCounters = {
-  VariableDeclartationCounter: 0,
-  LiteralCounter: 0,
-  CallExpressionCounter: 0,
-  BinaryExpressionCounter: 0,
-  MemberExpressionCounter: 0,
-  SwitchStatementCounter: 0,
-  SwitchCaseCounter: 0,
-  BreakStatementCounter: 0,
-  IfStatementCounter: 0,
-  WhileStatementCounter: 0,
-  ForStatementCounter: 0,
-  ForInStatementCounter: 0,
-  AssignmentExpressionCounter: 0,
-  UpdateExpressionCounter: 0
-}
-
-var complexities = {
-  VARIABLEDECLARATION: 1,
-  LITERAL: 1,
-  CALLEXPRESSION: 2,
-  BINARYEXPRESSION: 2,
-  UPDATEEXPRESSION: 2,
-  MEMBEREXPRESSION: 3,
-  SWITCHSTATEMENT: 3,
-  SWITCHCASE: 1,
-  BREAKSTATEMENT: 1,
-  IFSTATEMENT: 4,
-  WHILESTATEMENT: 5,
-  FORSTATEMENT: 5,
-  FORINSTATEMENT: 5,
-  ASSIGNMENTEXPRESSION: 6
-};
 
 module.exports = {
   getComplexity: getComplexity,
