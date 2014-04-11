@@ -13,6 +13,6 @@ var qualityMetricCounters = {
   ForInStatementCounter: 0,
   AssignmentExpressionCounter: 0,
   UpdateExpressionCounter: 0
-}
+};
 
 module.exports = qualityMetricCounters;
